@@ -12,7 +12,7 @@ phases:
       - echo Docker Running check 
       - docker info
       - echo Building sam...          
-      - sam build && sam package --template-file template.yml --s3-bucket swift-simple-lambda-bucket --output-template-file packaged-template.yml
+      - sam build && sam package --template-file .aws-sam/build/template.yaml --s3-bucket swift-simple-lambda-bucket --output-template-file packaged-template.yml
 artifacts:
   files:
     - packaged-template.yml 
