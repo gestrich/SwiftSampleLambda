@@ -13,7 +13,7 @@ builder-bot:
 	$(eval $@ARTIFACTS_DIR = $(PWD)/.aws-sam/build/$($@PRODUCT))
 	
 	# Create docker file
-	# docker build -f Dockerfile . -t builder
+	docker build -f Dockerfile . -t builder
 
 	# prep directories
 	mkdir -p $($@BUILD_DIR)/lambda $($@ARTIFACTS_DIR)
