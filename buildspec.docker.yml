@@ -9,6 +9,8 @@ phases:
       - echo Build started on `date`
       - echo Environment variables
       - env
+      - echo Docker Running check 
+      - docker info
       - echo Building sam...          
       - sam build && sam package --template-file template.yml --s3-bucket swift-simple-lambda-bucket --output-template-file packaged-template.yml
 artifacts:
