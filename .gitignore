@@ -8,4 +8,5 @@ DerivedData/
 .aws-sam
 samconfig.toml
 packaged-template.yaml
+packaged-template.yml
 packaged.yaml
