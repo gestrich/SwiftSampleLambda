@@ -1,8 +1,27 @@
 #!/bin/zsh
 
-function(){
+function deployGuided(){
+  
+  sam build; 
+  sam deploy --guided;
+}
+
+function package(){
+
+}
+
+function deployWithBucket(){
+  
+  if [ $# -lt 1 ]; then  
+    echo "Call with arguments <package name>"
+    exit 0
+  fi
+
+  s3Bucket=$1
+
   #Getting error because bucket name  Resource: 'arn:aws:s3:::swift-simple-lambda-bucket/*' is still in template
-  s3Bucket="test5.gestrich.org"; sam build --parameter-overrides UploadBucketName="${s3Bucket}"; sam deploy --stack-name Test5 --parameter-overrides ParameterKey=UploadBucketName,ParameterValue="${s3Bucket}" --s3-bucket=$s3Bucket --capabilities CAPABILITY_IAM;
+  sam build --parameter-overrides UploadBucketName="${s3Bucket}"; 
+  sam deploy --stack-name Test5 --parameter-overrides ParameterKey=UploadBucketName,ParameterValue="${s3Bucket}" --s3-bucket=$s3Bucket --capabilities CAPABILITY_IAM;
 }
 
 

@@ -2,11 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Swift Application
 
-Parameters:
-  UploadBucketName:
-    Description: S3 Bucket to upload to 
-    Type: String
-
 Globals:
   Function:
     Timeout: 10
@@ -27,26 +22,7 @@ Resources:
             Method: get
     Metadata:
       BuildMethod: makefile
-  UploadBucket:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: Retain
-    Properties:
-      BucketName: !Ref UploadBucketName 
-  S3BucketPolicy:
-    Type: 'AWS::S3::BucketPolicy'
-    Properties:
-      Bucket: !Ref UploadBucket 
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: serverlessrepo.amazonaws.com
-            Action: 
-              - 's3:GetObject'
-            Resource: 'arn:aws:s3:::swift-simple-lambda-bucket/*'
-            Condition:
-              StringEquals:
-                'aws:SourceAccount': '767387487465'
+
 Outputs:
   ApiEndpoint:
     Description: "API endpoint URL"
