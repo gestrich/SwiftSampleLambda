@@ -2,6 +2,11 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Swift Application
 
+Parameters:
+  UploadBucketName:
+    Description: S3 Bucket to upload to 
+    Type: String
+
 Globals:
   Function:
     Timeout: 10
@@ -22,15 +27,15 @@ Resources:
             Method: get
     Metadata:
       BuildMethod: makefile
-  S3Bucket:
+  UploadBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Retain
     Properties:
-      BucketName: swift-simple-lambda-bucket 
+      BucketName: !Ref UploadBucketName 
   S3BucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
-      Bucket: !Ref S3Bucket 
+      Bucket: !Ref UploadBucket 
       PolicyDocument:
         Statement:
           - Effect: Allow
